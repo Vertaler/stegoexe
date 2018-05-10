@@ -13,8 +13,8 @@ def is_instr_suitable_for_stego(instr):
     :return: True if instr is 'sub' or 'add' and it has number second operand, False otherwise
     For example,
     add eax, 1 -> True
-    add eax, ebx -> False (not number second operand)
-    adc eax, 1 -> (instruction is not add or sub)
+    add eax, ebx -> False (second operand is not number)
+    adc eax, 1 -> False (instruction is not add or sub)
     '''
     if instr.mnemonic not in ["sub", "add"]:
         return False
