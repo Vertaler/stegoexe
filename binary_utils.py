@@ -100,7 +100,7 @@ def expand_section(binary, section_name, raw_expansion):
     found = False
     raw_size_addition = binary.optional_header.file_alignment * raw_expansion
     section_alignment = binary.optional_header.section_alignment
-    virtual_size_addition = int(math.ceil(float(raw_size_addition) / section_alignment)) * section_alignment
+    virtual_size_addition = int (math.ceil(float(raw_size_addition) / section_alignment)) * section_alignment
 
     section = binary.get_section(section_name)
     index = list(binary.sections).index(section)
@@ -133,6 +133,9 @@ def light_expand_section(binary, section_name):
 
 def rebuild_binary(binary, output_path):
     new_binary = lief.PE.Binary(binary.name, lief.PE.PE_TYPE.PE32)
+    new_binary.dos_header.addressof_new_exeheader = binary.dos_header.addressof_new_exeheader
+    new_binary.dos_stub = binary.dos_stub
+    new_binary.optional_header.subsystem = binary.optional_header.subsystem
     for section in binary.sections:
         if len(section.content) < section.size:
             section.content += [0] * (section.size - len(section.content))
