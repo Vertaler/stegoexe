@@ -3,7 +3,8 @@ from optparse import OptionParser
 import stego_obfus
 
 if __name__ == "__main__":
-    stego_obfus.insert_message('123', 'functions.exe')
+    stego_obfus.insert_message('12', 'functions.exe')
+    print stego_obfus.extract_message('modified.exe')
     parser = OptionParser()
     parser.add_option("-c", "--container", dest="container", help="path to container", metavar='CONTAINER')
     parser.add_option("-o", "--out",
